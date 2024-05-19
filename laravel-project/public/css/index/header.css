@@ -54,6 +54,13 @@ body {
 .fa-plus {
     font-size: 1.2vw;
 }
+.logout-button {
+    cursor: pointer;
+    border: none;
+    background-color: #2E456C;
+    color: #63E6BE;
+    font-size: 1.2vw;
+}
 
 
 .main {

@@ -27,7 +27,7 @@
                     @auth
                     <li class="mypage"><a href="{{ route('mypage.index') }}"><i class="fa-solid fa-user" style="color: #63E6BE;"></i></a></li>
                     <li class="create"><a href="{{ route('index.create') }}"><i class="fa-solid fa-plus" style="color: #63E6BE;"></i></a></li>
-                    <form action="" method="post" class="logout">
+                    <form action="{{ route('logout') }}" method="post" class="logout">
                         @csrf
                         <button type="submit" class="logout-button">ログアウト</button>
                     </form>

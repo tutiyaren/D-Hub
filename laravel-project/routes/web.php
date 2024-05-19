@@ -23,7 +23,10 @@ use App\Http\Controllers\SocialController;
 
 // 認証
 Route::get('/register', [UserController::class, 'register'])->name('auth.register');
+Route::post('/signup', [UserController::class, 'signup'])->name('signup');
 Route::get('/login', [UserController::class, 'login'])->name('auth.login');
+Route::post('/signin', [UserController::class, 'signin'])->name('signin');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // トップ
 Route::get('/', [TopController::class, 'index'])->name('index.index');
