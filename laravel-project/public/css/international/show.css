@@ -1,0 +1,148 @@
+.main {
+    width: 100%;
+}
+.back {
+    width: 80%;
+    margin: 0 auto;
+}
+.back-link {
+    text-decoration: none;
+    color: #a789f8;
+    border: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 1% 2%;
+    font-size: 1.3vw;
+}
+.back-link:hover {
+    background-color: #63E6BE;
+}
+
+.ttl {
+    text-align: center;
+    color: #a789f8;
+}
+.ttl-top {
+    margin: 0 auto;
+    font-size: 3vw;
+    border-bottom: 1px solid #63E6BE;
+    width: 30%;
+    letter-spacing: 15px;
+}
+
+.inner {
+    width: 85%;
+    margin: 6% auto;
+}
+.card {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 2% 4% 1%;
+    margin-bottom: 3%;
+}
+.card-inner {
+    color: #a789f8;
+}
+.card:hover {
+    background-color: #63E6BE;
+}
+.title-name {
+    border-bottom: 1px solid #63E6BE;
+    width: 100%;
+    font-size: 1.6vw;
+}
+.contents-inner {
+    letter-spacing: 3px;
+    line-height: 130%;
+    font-size: 1.4vw;
+}
+.user {
+    display: flex;
+    justify-content: space-between;
+}
+.user-name {
+    font-size: 1.2vw;
+    border-top: 1px solid #63E6BE;
+}
+.user-create {
+    font-size: 1vw;
+    margin-top: 2%;
+    border-top: 1px solid #63E6BE;
+}
+
+.comments {
+    width: 85%;
+    margin: 6% auto;
+    max-height: 700px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #a789f8 #2E456C;
+}
+.comments-card {
+    width: 100%;
+    border-bottom: 1px solid #63E6BE;
+    border-top: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 2% 4% 1%;
+    color: #a789f8;
+}
+.comment-text {
+    letter-spacing: 2px;
+    line-height: 120%;
+    font-size: 1vw;
+    font-weight: bold;
+}
+.who {
+    display: flex;
+    justify-content: space-between;
+}
+.who-name {
+    font-size: 0.8vw;
+    border-top: 1px solid #63E6BE;
+}
+.who-create {
+    font-size: 0.6vw;
+    margin-top: 2%;
+    border-top: 1px solid #63E6BE;
+}
+
+.add {
+    width: 85%;
+    margin: 0 auto 5%;
+    text-align: center;
+    border-top: 1px solid #63E6BE;
+    padding: 2% 4% 4%;
+}
+.text-ttl {
+    color: #a789f8;
+    font-size: 2vw;
+}
+.text-text {
+    border-radius: 10px;
+    border: 1px solid #63E6BE;
+    background-color: #2E456C;
+    color: #a789f8;
+    font-weight: bold;
+    width: 70%;
+    font-size: 1.3vw;
+    padding: 2% 3%;
+}
+
+.submit {
+    margin-top: 4%;
+    text-align: center;
+}
+.submit-button {
+    border-radius: 10px;
+    border: 1px solid #63E6BE;
+    background-color: #2E456C;
+    color: #a789f8;
+    padding: 1% 4%;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1vw;
+}
+.submit-button:hover {
+    background-color: #63E6BE;
+}

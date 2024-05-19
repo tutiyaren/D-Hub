@@ -1,0 +1,140 @@
+.main {
+    width: 100%;
+}
+
+.ttl {
+    text-align: center;
+    color: #a789f8;
+}
+.ttl-top {
+    margin: 0 auto;
+    font-size: 3vw;
+    border-bottom: 1px solid #63E6BE;
+    width: 30%;
+    letter-spacing: 15px;
+}
+
+.item {
+    width: 90%;
+    text-align: right;
+    margin-top: 4%;
+}
+.search-keyword {
+    font-size: 0.8vw;
+    width: 20%;
+}
+.search-keyword:hover,
+.submit:hover {
+    background-color: #63E6BE;
+}
+.submit {
+    cursor: pointer;
+    font-size: 0.8vw;
+}
+.search-keyword,
+.submit {
+    border-radius: 10px;
+    border: 1px solid #63E6BE;
+    background-color: #2E456C;
+    color: #a789f8;
+    font-weight: bold;
+    padding: 1% 2%;
+}
+
+.inner {
+    width: 85%;
+    margin: 4% auto;
+}
+.cards {
+    width: 100%;
+}
+.card {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 2% 4% 1%;
+    margin-bottom: 3%;
+}
+.card-inner {
+    text-decoration: none;
+    color: #a789f8;
+}
+.card:hover {
+    background-color: #63E6BE;
+}
+.title-name {
+    border-bottom: 1px solid #63E6BE;
+    width: 100%;
+    font-size: 1.6vw;
+}
+.contents-inner {
+    letter-spacing: 3px;
+    line-height: 130%;
+    font-size: 1.4vw;
+}
+.user {
+    display: flex;
+    justify-content: space-between;
+}
+.user-name {
+    font-size: 1.2vw;
+    border-top: 1px solid #63E6BE;
+}
+.user-create {
+    font-size: 1vw;
+    margin-top: 2%;
+    border-top: 1px solid #63E6BE;
+}
+.mark {
+    border-top: 1px solid #63E6BE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 1%;
+}
+.mark-left {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    text-align: left;
+}
+.both {
+    margin-right: 5%;
+}
+.both-pros,
+.both-cons,
+.bookmark-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.both-pros i,
+.both-cons i,
+.bookmark-button i {
+    color: #a389f8;
+    transition: color 0.3s ease;
+}
+
+.both-pros i,
+.both-cons i,
+.bookmark-button i,
+.comment i,
+.comment-count {
+    font-size: 1.2vw;
+}
+.mark-right {
+    width: 30%; 
+    align-items: center; 
+}
+.comment {
+    display: flex;
+    align-items: center;
+}
+.comment-count {
+    margin-top: 0;
+    color: #a789f8;
+    margin-left: 2%;
+    margin-bottom: 0;
+}

@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2E456C;
+}
+
+.header {
+    width: 100%;
+}
+.logo {
+    text-align: center;
+}
+.logo-image {
+    max-height: 20vw;
+    max-width: 20vw;
+    height: auto;
+    width: auto;
+}
+
+.main {
+    width: 100%;
+}
+
+.footer {
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+.copyright {
+    width: 100%;
+    text-align: right;
+}
+.copyright-ttl {
+    color: #63E6BE;
+    margin-right: 10%;
+    opacity: 0.4;
+}

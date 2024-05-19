@@ -1,0 +1,45 @@
+.main {
+    width: 100%;
+}
+.ttl-my {
+    text-align: center;
+    color: #a789f8;
+}
+.ttl-top {
+    margin: 0 auto;
+    font-size: 3vw;
+    border-bottom: 1px solid #63E6BE;
+    width: 30%;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+    gap: 8vh;
+    padding: 5% 10%;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5%;
+    border: 1px solid #63E6BE;
+    color: #2E456C;
+}
+.card:hover {
+    background-color: #63E6BE;
+}
+
+.ttl {
+    margin-top: 3%;
+    text-align: center;
+}
+.ttl-politics,
+.ttl-economy,
+.ttl-international,
+.ttl-social {
+    font-size: 2rem;
+    font-weight: bold;
+}
