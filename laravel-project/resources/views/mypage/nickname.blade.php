@@ -15,11 +15,14 @@
         <p class="description-text">～D-Hubで使用する名前を設定しましょう～</p>
     </div>
 
-    <form action="" method="post" class="form">
+    <form action="{{ route('mypage.store') }}" method="post" class="form">
         @csrf
         <div class="name">
             <p class="name-ttl"><label for="nickname">ニックネーム</label></p>
-            <input type="text" name="nickname" value="" id="nickname" class="name-input" placeholder="NickName">
+            <input type="text" name="nickname" value="{{ $anonymity ? $anonymity->nickname : '' }}" id="nickname" class="name-input" placeholder="NickName">
+            @error('nickname')
+            <p class="error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="submit">
             <button type="submit" class="submit-button">決定</button>
