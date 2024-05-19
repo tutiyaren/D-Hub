@@ -30,18 +30,6 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // トップ
 Route::get('/', [TopController::class, 'index'])->name('index.index');
-Route::get('/create', [TopController::class, 'create'])->name('index.create');
-
-// お問い合わせ
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.contact');
-Route::get('/confirmation', [ContactController::class, 'confirmation'])->name('contact.confirmation');
-Route::get('/thank', [ContactController::class, 'thank'])->name('contact.thank');
-
-// マイページ
-Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
-Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
-Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
-Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
 
 // 政治
 Route::get('/politics', [PoliticsController::class, 'index'])->name('politics.index');
@@ -55,6 +43,24 @@ Route::get('/international/show', [InternationalController::class, 'show'])->nam
 // 社会
 Route::get('/social', [SocialController::class, 'index'])->name('social.index');
 Route::get('/social/show', [SocialController::class, 'show'])->name('social.show');
+
+Route::group(['middleware' => 'auth'], function () {
+    // 作成
+    Route::get('/create', [TopController::class, 'create'])->name('index.create');
+
+    // お問い合わせ
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.contact');
+    Route::post('/confirmation', [ContactController::class, 'confirmation'])->name('contact.confirmation');
+    Route::get('/confirmation', [ContactController::class, 'showConfirmation'])->name('contact.showConfirmation');
+    Route::post('/complate', [ContactController::class, 'complate'])->name('contact.complate');
+    // Route::get('/thank', [ContactController::class, 'thank'])->name('contact.thank');
+
+    // マイページ
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+    Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
+    Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
+    Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
+});
 
 
 
