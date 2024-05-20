@@ -25,4 +25,11 @@ class Debate extends Model
     {
         return $this->belongsTo(Genre::class, 'genre_id');
     }
+
+    public function scopeTitleSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('title', 'like', '%' . $keyword . '%');
+        }
+    }
 }
