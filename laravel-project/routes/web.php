@@ -47,15 +47,16 @@ Route::get('/social/show', [SocialController::class, 'show'])->name('social.show
 Route::group(['middleware' => 'auth'], function () {
     // 作成
     Route::get('/create', [TopController::class, 'create'])->name('index.create');
+    Route::post('/create/store', [TopController::class, 'store'])->name('index.store');
 
     // マイページ
     Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 
-    Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
-    Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
-
     Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
     Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
+
+    Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
+    Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
 
     // お問い合わせ
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.contact');
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/complate', [ContactController::class, 'complate'])->name('contact.complate');
 });
 
+
+// その後、ディベートの作成処理をコントローラーでやっていく。（validateは実装済み）。titleとcontentsのvalue=""を設定。セレクトタグはOK。
 
 
 
