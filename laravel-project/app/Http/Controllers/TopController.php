@@ -28,7 +28,7 @@ class TopController extends Controller
         $userId = auth()->user()->id;
         $anonymity = Anonymity::where('user_id', $userId)->first();
         if (!$anonymity) {
-            return redirect()->route('index.create')->with('error', 'ニックネームを設定してください');
+            return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
         }
         $genreId = $request->input('genre_id');
         $title = $request->input('title');

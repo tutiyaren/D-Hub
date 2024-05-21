@@ -15,6 +15,12 @@
         <p class="description-text">～D-Hubで使用する名前を設定しましょう～</p>
     </div>
 
+    @if(session('error'))
+    <div class="error-top">
+        {{ session('error') }}
+    </div>
+    @endif
+
     <form action="{{ route('mypage.store') }}" method="post" class="form">
         @csrf
         <div class="name">

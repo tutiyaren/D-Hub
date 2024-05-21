@@ -23,4 +23,9 @@ class Anonymity extends Model
     {
         return $this->hasMany(Debate::class, 'anonymity_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'anonymity_id');
+    }
 }
