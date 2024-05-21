@@ -21,8 +21,10 @@ class PoliticsController extends Controller
         return view('politics.index', compact('debates', 'genre'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('politics.show');
+        $debate = Debate::find($id);
+        $genre = Genre::find(1);
+        return view('politics.show', compact('debate', 'genre'));
     }
 }

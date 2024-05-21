@@ -30,7 +30,7 @@
             <!-- foreach -->
             @foreach($debates as $debate)
             <div class="card">
-                <a href="{{ route('politics.show') }}" class="card-inner">
+                <a href="{{ route('politics.show', $debate->id) }}" class="card-inner">
                     <!-- タイトル -->
                     <div class="title">
                         <h2 class="title-name">{{ $debate->title }}</h2>

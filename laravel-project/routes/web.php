@@ -33,16 +33,16 @@ Route::get('/', [TopController::class, 'index'])->name('index.index');
 
 // 政治
 Route::get('/politics', [PoliticsController::class, 'index'])->name('politics.index');
-Route::get('/politics/show', [PoliticsController::class, 'show'])->name('politics.show');
+Route::get('/politics/show/{id}', [PoliticsController::class, 'show'])->name('politics.show');
 // 経済
 Route::get('/economy', [EconomyController::class, 'index'])->name('economy.index');
-Route::get('/economy/show', [EconomyController::class, 'show'])->name('economy.show');
+Route::get('/economy/show/{id}', [EconomyController::class, 'show'])->name('economy.show');
 // 国際
 Route::get('/international', [InternationalController::class, 'index'])->name('international.index');
-Route::get('/international/show', [InternationalController::class, 'show'])->name('international.show');
+Route::get('/international/show/{id}', [InternationalController::class, 'show'])->name('international.show');
 // 社会
 Route::get('/social', [SocialController::class, 'index'])->name('social.index');
-Route::get('/social/show', [SocialController::class, 'show'])->name('social.show');
+Route::get('/social/show/{id}', [SocialController::class, 'show'])->name('social.show');
 
 Route::group(['middleware' => 'auth'], function () {
     // 作成
@@ -66,8 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-// その後、ディベートの作成処理をコントローラーでやっていく。（validateは実装済み）。titleとcontentsのvalue=""を設定。セレクトタグはOK。
-
+// 詳細ページのリンクをやって、各議題ごとの詳細ページを作成していく
+// 賛成・反対、ブックマーク、コメント数はまだ先！！
 
 
 // Route::get('/', function () {

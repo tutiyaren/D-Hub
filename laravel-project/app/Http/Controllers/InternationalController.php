@@ -21,8 +21,10 @@ class InternationalController extends Controller
         return view('international.index', compact('debates', 'genre'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('international.show');
+        $debate = Debate::find($id);
+        $genre = Genre::find(3);
+        return view('international.show', compact('debate', 'genre'));
     }
 }

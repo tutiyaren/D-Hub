@@ -21,8 +21,10 @@ class SocialController extends Controller
         return view('social.index', compact('debates', 'genre'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('social.show');
+        $debate = Debate::find($id);
+        $genre = Genre::find(4);
+        return view('social.show', compact('debate', 'genre'));
     }
 }
