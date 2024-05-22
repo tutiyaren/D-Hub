@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AnonymityRequest;
 use App\Models\Anonymity;
+use App\Models\Debate;
 
 class MypageController extends Controller
 {
@@ -43,8 +44,24 @@ class MypageController extends Controller
         return view('mypage.bookmark');
     }
 
-    public function post()
+    public function post(Request $request)
     {
-        return view('mypage.post');
+        $userId = auth()->user()->id;
+        $anonymity = Anonymity::where('user_id', $userId)->first();
+        $keyword = $request->input('keyword');
+        if ($keyword) {
+            $myDebates = Debate::where('anonymity_id', $anonymity->id)->titleSearch($keyword)->paginate(5);
+        }
+        if (!$keyword) {
+            $myDebates = Debate::where('anonymity_id', $anonymity->id)->paginate(5);
+        }
+        return view('mypage.post', compact('myDebates'));
+    }
+
+    public function destory(Request $request, $id)
+    {
+        $debate = Debate::find($id);
+        $debate->delete();
+        return redirect()->route('mypage.post');
     }
 }

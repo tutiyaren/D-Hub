@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
     Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
+    Route::delete('/mypage/destory/{id}', [MypageController::class, 'destory'])->name('mypage.destory');
 
     Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
     Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
