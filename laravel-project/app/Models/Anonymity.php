@@ -28,4 +28,9 @@ class Anonymity extends Model
     {
         return $this->hasMany(Comment::class, 'anonymity_id');
     }
+
+    public function favorites_debates()
+    {
+        return $this->hasMany(Favorite_Debate::class, 'anonymity_id');
+    }
 }

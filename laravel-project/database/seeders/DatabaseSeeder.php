@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Favorite_Debate;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GenresTableSeeder::class);
         $this->call(DebatesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(Favorites_DebatesTableSeeder::class);
     }
 }

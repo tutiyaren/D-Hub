@@ -14,9 +14,9 @@
 
     <!-- 検索 -->
     <div class="item">
-        <form action="" method="get" class="search">
+        <form method="get" class="search">
             @csrf
-            <input type="text" name="" value="" placeholder="キーワードで探す" class="search-keyword">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="キーワードで探す" class="search-keyword">
             <button type="submit" class="submit">検索</button>
         </form>
     </div>
@@ -27,20 +27,25 @@
         <div class="cards">
 
             <!-- foreach -->
+            @foreach($bookmarkDebates as $bookmarkDebate)
             <div class="card">
-                <a href="{{ route('politics.show') }}" class="card-inner">
+                <a href="{{ $bookmarkDebate->debate->generateRoute() }}" class="card-inner">
+                    <!-- ジャンル名 -->
+                    <div class="genre">
+                        <p class="genre-ttl">{{ $bookmarkDebate->debate->genre->name }}</p>
+                    </div>
                     <!-- タイトル -->
                     <div class="title">
-                        <h2 class="title-name">与党の政策について</h2>
+                        <h2 class="title-name">{{ $bookmarkDebate->debate->title }}</h2>
                     </div>
                     <!-- 内容 -->
                     <div class="contents">
-                        <h3 class="contents-inner">過去の経験から、今回の○○について、私は反対です。理由はこここういうことで何々が予想され結果、またあの時のようなことが起きると思います。皆さんの意見を聞かせてください。</h3>
+                        <h3 class="contents-inner">{{ $bookmarkDebate->debate->contents }}</h3>
                     </div>
                     <!-- 投稿者情報 -->
                     <div class="user">
-                        <h4 class="user-name">大嶋くるみああああああああああああああああああああああ</h4>
-                        <p class="user-create">2024-05-31 12:58:35</p>
+                        <h4 class="user-name">{{ $bookmarkDebate->debate->anonymity->nickname }}</h4>
+                        <p class="user-create">{{ $bookmarkDebate->created_at }}</p>
                     </div>
                 </a>
                 <!-- マーク等 -->
@@ -51,95 +56,27 @@
                             <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
                             <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
                         </form>
-                        <form action="" method="post" class="bookmark">
+                        <form action="{{ route('mypage.bookmarkToggle') }}" method="post" class="bookmark">
+                            @method('delete')
                             @csrf
-                            <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
+                            <button type="submit" class="bookmark-button">
+                                <i class="fa-solid fa-bookmark" style="color: olive;"></i>
+                                <input type="hidden" name="debate_id" value="{{ $bookmarkDebate->debate_id }}">
+                            </button>
                         </form>
                     </div>
                     <div class="mark-right">
                         <div class="comment">
                             <i class="fa-regular fa-comments" style="color: #a789f8;"></i>
-                            <p class="comment-count">5</p>
+                            <p class="comment-count">{{ $bookmarkDebate->debate->comments->count() }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="card">
-                <a href="" class="card-inner">
-                    <!-- タイトル -->
-                    <div class="title">
-                        <h2 class="title-name">与党の政策について</h2>
-                    </div>
-                    <!-- 内容 -->
-                    <div class="contents">
-                        <h3 class="contents-inner">過去の経験から、今回の○○について、私は反対です。理由はこここういうことで何々が予想され結果、またあの時のようなことが起きると思います。皆さんの意見を聞かせてください。</h3>
-                    </div>
-                    <!-- 投稿者情報 -->
-                    <div class="user">
-                        <h4 class="user-name">大嶋くるみ</h4>
-                        <p class="user-create">2024-05-31 12:58:35</p>
-                    </div>
-                </a>
-                <!-- マーク等 -->
-                <div class="mark">
-                    <div class="mark-left">
-                        <form action="" method="post" class="both">
-                            @csrf
-                            <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
-                            <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
-                        </form>
-                        <form action="" method="post" class="bookmark">
-                            @csrf
-                            <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
-                        </form>
-                    </div>
-                    <div class="mark-right">
-                        <div class="comment">
-                            <i class="fa-regular fa-comments" style="color: #a789f8;"></i>
-                            <p class="comment-count">5</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <a href="" class="card-inner">
-                    <!-- タイトル -->
-                    <div class="title">
-                        <h2 class="title-name">与党の政策について</h2>
-                    </div>
-                    <!-- 内容 -->
-                    <div class="contents">
-                        <h3 class="contents-inner">過去の経験から、今回の○○について、私は反対です。理由はこここういうことで何々が予想され結果、またあの時のようなことが起きると思います。皆さんの意見を聞かせてください。</h3>
-                    </div>
-                    <!-- 投稿者情報 -->
-                    <div class="user">
-                        <h4 class="user-name">大嶋くるみ</h4>
-                        <p class="user-create">2024-05-31 12:58:35</p>
-                    </div>
-                </a>
-                <!-- マーク等 -->
-                <div class="mark">
-                    <div class="mark-left">
-                        <form action="" method="post" class="both">
-                            @csrf
-                            <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
-                            <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
-                        </form>
-                        <form action="" method="post" class="bookmark">
-                            @csrf
-                            <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
-                        </form>
-                    </div>
-                    <div class="mark-right">
-                        <div class="comment">
-                            <i class="fa-regular fa-comments" style="color: #a789f8;"></i>
-                            <p class="comment-count">5</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
+        </div>
+        <div class="paginate">
+            {{ $bookmarkDebates->appends(request()->query())->links('vendor.pagination.custom') }}
         </div>
     </div>
 

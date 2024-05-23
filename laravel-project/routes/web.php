@@ -51,17 +51,22 @@ Route::group(['middleware' => 'auth'], function () {
 
     // 政治
     Route::post('/politics/show/{id}/store', [PoliticsController::class, 'store'])->name('politics.store');
+    Route::post('/politics/bookmark/{id}', [PoliticsController::class, 'bookmark'])->name('politics.bookmark');
     // 経済
     Route::post('/economy/show/{id}/store', [EconomyController::class, 'store'])->name('economy.store');
+    Route::post('/economy/bookmark/{id}', [EconomyController::class, 'bookmark'])->name('economy.bookmark');
     // 国際
     Route::post('/international/show/{id}/store', [InternationalController::class, 'store'])->name('international.store');
+    Route::post('/international/bookmark/{id}', [InternationalController::class, 'bookmark'])->name('international.bookmark');
     // 社会
     Route::post('/social/show/{id}/store', [SocialController::class, 'store'])->name('social.store');
+    Route::post('/social/bookmark/{id}', [SocialController::class, 'bookmark'])->name('social.bookmark');
 
     // マイページ
     Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 
     Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
+    Route::delete('/mypage/bookmark/delete', [MypageController::class, 'bookmarkToggle'])->name('mypage.bookmarkToggle');
     Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
     Route::delete('/mypage/destory/{id}', [MypageController::class, 'destory'])->name('mypage.destory');
 
@@ -75,9 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/complate', [ContactController::class, 'complate'])->name('contact.complate');
 });
 
-
-// マイページから
-// 賛成・反対、ブックマーク、コメント数はまだ先！！
+// ブックマークは終了かな？
+// マイ投稿一覧に、自分のニックネームいるか？
+// マイ投稿一覧では、賛成・反対は押せないが、数を確認できる
+// ブックマーク一覧では、すべてできる
 
 
 // Route::get('/', function () {

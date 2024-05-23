@@ -54,9 +54,16 @@
                             <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
                             <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
                         </form>
-                        <form action="" method="post" class="bookmark">
+                        <form action="{{ route('international.bookmark', $debate->id) }}" method="post" class="bookmark">
                             @csrf
-                            <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
+                            <button type="submit" class="bookmark-button">
+                                @if ($isBookmarked[$debate->id])
+                                <i class="fa-solid fa-bookmark" style="color: olive;"></i>
+                                @endif
+                                @if (!($isBookmarked[$debate->id]))
+                                <i class="fa-solid fa-bookmark"></i>
+                                @endif
+                            </button>
                         </form>
                         @endauth
                     </div>
