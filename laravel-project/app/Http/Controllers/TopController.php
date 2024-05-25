@@ -26,7 +26,7 @@ class TopController extends Controller
     public function store(DebateRequest $request)
     {
         $userId = auth()->user()->id;
-        $anonymity = Anonymity::where('user_id', $userId)->first();
+        $anonymity = Anonymity::getByUserId($userId);
         if (!$anonymity) {
             return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
         }

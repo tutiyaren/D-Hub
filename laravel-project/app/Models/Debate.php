@@ -36,6 +36,11 @@ class Debate extends Model
         return $this->hasMany(Favorite_Debate::class, 'anonymity_id');
     }
 
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'debate_id');
+    }
+
     public function scopeTitleSearch($query, $keyword)
     {
         if (!empty($keyword)) {

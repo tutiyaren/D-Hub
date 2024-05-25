@@ -7,6 +7,10 @@
 @section('content')
 
 <div class="main">
+    <!-- 戻る -->
+    <div class="back">
+        <a href="{{ url()->previous() }}" class="back-link">←</a>
+    </div>
     <!-- マイブックマーク一覧 -->
     <div class="ttl">
         <h1 class="ttl-top">マイブックマーク一覧</h1>
@@ -51,10 +55,25 @@
                 <!-- マーク等 -->
                 <div class="mark">
                     <div class="mark-left">
-                        <form action="" method="post" class="both">
+                        <form action="{{ route('mypage.vote', $bookmarkDebate->id) }}" method="post" class="both">
                             @csrf
-                            <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
-                            <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
+                            <input type="hidden" name="debate_id" value="{{ $bookmarkDebate->debate_id }}">
+                            <button type="submit" name="vote_type" value="agree" class="both-pros">
+                                @if ($isVote[$bookmarkDebate->id] === 'agree')
+                                <i class="fa-solid fa-circle" style="color: #FF4500;"></i>
+                                @endif
+                                @if (!($isVote[$bookmarkDebate->id] === 'agree'))
+                                <i class="fa-solid fa-circle"></i>
+                                @endif
+                            </button>
+                            <button type="submit" name="vote_type" value="disagree" class="both-cons">
+                                @if ($isVote[$bookmarkDebate->id]=== 'disagree')
+                                <i class="fa-solid fa-xmark" style="color: #0000CD;"></i>
+                                @endif
+                                @if (!($isVote[$bookmarkDebate->id]=== 'disagree'))
+                                <i class="fa-solid fa-xmark"></i>
+                                @endif
+                            </button>
                         </form>
                         <form action="{{ route('mypage.bookmarkToggle') }}" method="post" class="bookmark">
                             @method('delete')

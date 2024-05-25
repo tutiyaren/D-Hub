@@ -7,6 +7,10 @@
 @section('content')
 
 <div class="main">
+    <!-- 戻る -->
+    <div class="back">
+        <a href="{{ url()->previous() }}" class="back-link">←</a>
+    </div>
     <!-- マイ投稿一覧 -->
     <div class="ttl">
         <h1 class="ttl-top">マイ投稿一覧</h1>
@@ -22,7 +26,6 @@
     </div>
 
     <!-- 一覧 -->
-    <!-- ページネーション -->
     <div class="inner">
         <div class="cards">
 
@@ -44,18 +47,22 @@
                     </div>
                     <!-- 投稿者情報 -->
                     <div class="user">
-                        <h4 class="user-name">{{ $myDebate->anonymity->nickname }}</h4>
                         <p class="user-create">{{ $myDebate->created_at }}</p>
                     </div>
                 </a>
                 <!-- マーク等 -->
                 <div class="mark">
                     <div class="mark-left">
-                        <form action="" method="post" class="both">
-                            @csrf
-                            <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
-                            <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
-                        </form>
+                        <div class="both">
+                            <span type="submit" name="vote_type" value="agree" class="both-pros">
+                                <i class="fa-solid fa-circle" style="color: #FF4500;"></i>
+                                <p class="count-agree">{{ $myDebate->votes()->where('vote_type', 'agree')->count() }}</p>
+                            </span>
+                            <span type="submit" name="vote_type" value="disagree" class="both-cons">
+                                <i class="fa-solid fa-xmark" style="color: #0000CD;"></i>
+                                <p class="count-disagree">{{ $myDebate->votes()->where('vote_type', 'disagree')->count() }}</p>
+                            </span>
+                        </div>
                     </div>
                     <div class="mark-right">
                         <div class="comment">

@@ -1,6 +1,21 @@
 .main {
     width: 100%;
 }
+.back {
+    width: 80%;
+    margin: 0 auto;
+}
+.back-link {
+    text-decoration: none;
+    color: #a789f8;
+    border: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 1% 2%;
+    font-size: 1.3vw;
+}
+.back-link:hover {
+    background-color: #63E6BE;
+}
 
 .ttl {
     text-align: center;
