@@ -83,6 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/complate', [ContactController::class, 'complate'])->name('contact.complate');
 });
 
+// nicknameを設定いてからの動きをみる。それでOKならば、valueObjectは終了。
+
 
 // Route::get('/', function () {
 //     return view('welcome');

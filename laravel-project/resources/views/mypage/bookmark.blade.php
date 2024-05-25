@@ -32,6 +32,7 @@
 
             <!-- foreach -->
             @foreach($bookmarkDebates as $bookmarkDebate)
+            @if ($bookmarkDebate->debate)
             <div class="card">
                 <a href="{{ $bookmarkDebate->debate->generateRoute() }}" class="card-inner">
                     <!-- ジャンル名 -->
@@ -92,6 +93,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
         <div class="paginate">
