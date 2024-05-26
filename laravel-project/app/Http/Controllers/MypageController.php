@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AnonymityRequest;
+use App\UseCase\Services\UserService;
 use App\Models\Anonymity;
-use App\Models\Debate;
-use App\Models\Favorite_Debate;
-use App\Models\Vote;
+use App\UseCase\Mypage\CreateNicknameUseCase;
+use App\UseCase\Mypage\DeleteBookmarkUseCase;
+use App\UseCase\Mypage\DeleteDebateUseCase;
+use App\UseCase\Mypage\GetBookmarkUseCase;
+use App\UseCase\Mypage\GetMyDebateUseCase;
 
 class MypageController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function index()
     {
         return view('mypage.index');
@@ -19,119 +29,76 @@ class MypageController extends Controller
     // ニックネーム設定ページ
     public function nickname()
     {
-        $userId = auth()->user()->id;
-        $anonymity = Anonymity::getByUserId($userId);
+        $anonymity = $this->userService->checkAnonymity();
         return view('mypage.nickname', compact('anonymity'));
     }
     
     // ニックネーム追加・編集
-    public function store(AnonymityRequest $request)
+    public function store(AnonymityRequest $request, CreateNicknameUseCase $case)
     {
         $userId = auth()->user()->id;
         $nickname = $request->input('nickname');
-        $anonymity = Anonymity::getByUserId($userId);
+        $anonymity = $this->userService->checkAnonymity();
         if ($anonymity) {
             $anonymity->update(['nickname' => $nickname]);
             return redirect()->route('mypage.index')->with('error', 'ニックネームを設定してください');
         }
-        Anonymity::create([
-            'user_id' => $userId,
-            'nickname' => $nickname
-        ]);
+        $case($userId, $nickname);
         return redirect()->route('index.index');
     }
 
-    public function bookmark(Request $request)
+    public function bookmark(Request $request, GetBookmarkUseCase $case)
     {
-        $userId = auth()->user()->id;
+        $userId = auth()->id();
         $anonymity = Anonymity::getByUserId($userId);
         if (!$anonymity) {
             return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
         }
+        $anonymity = $this->userService->checkAnonymity();
+        $this->userService->isCheckAnonymity($anonymity);
         $keyword = $request->input('keyword');
-        if ($keyword) {
-            $bookmarkDebates = Favorite_Debate::where('anonymity_id', $anonymity->id)->titleSearch($keyword)->orderBy('created_at', 'desc')->paginate(5);
-        }
-        if (!$keyword) {
-            $bookmarkDebates = Favorite_Debate::where('anonymity_id', $anonymity->id)->orderBy('created_at', 'desc')->paginate(5);
-        }
-        $isVote = [];
-        foreach ($bookmarkDebates as $debate) {
-            $debateId = $debate->debate_id;
-            $vote = Vote::where('anonymity_id', $anonymity->id)->where('debate_id', $debateId)->first();
-            if (!$vote) {
-                $isVote[$debate->id] = null;
-            }
-            if ($vote) {
-                $isVote[$debate->id] = $vote->vote_type;
-            }
-        }
+        list('bookmarkDebates' => $bookmarkDebates, 'isVote' => $isVote) = $case($anonymity, $keyword);
         return view('mypage.bookmark', compact('bookmarkDebates', 'isVote'));
     }
 
-    public function bookmarkToggle(Request $request)
+    public function bookmarkToggle(Request $request, DeleteBookmarkUseCase $case)
     {
         $debateId = $request->input('debate_id');
-        $userId = auth()->user()->id;
-        $anonymity = Anonymity::getByUserId($userId);
-        if (!$anonymity) {
-            return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
-        }
-        $favoriteDebate = Favorite_Debate::where('anonymity_id', $anonymity->id)->where('debate_id', $debateId)->first();
-        $favoriteDebate->delete();
+        $anonymity = $this->userService->checkAnonymity();
+        $this->userService->isCheckAnonymity($anonymity);
+        $case($anonymity, $debateId);
         return redirect()->route('mypage.bookmark');
     }
 
     public function vote(Request $request)
     {
-        $userId = auth()->user()->id;
-        $anonymity = Anonymity::getByUserId($userId);
-        if (!$anonymity) {
-            return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
-        }
+        $anonymity = $this->userService->checkAnonymity();
+        $this->userService->isCheckAnonymity($anonymity);
+
         $voteType = $request->input('vote_type');
         $debateId = $request->input('debate_id');
-
-        $existingVote = Vote::where('anonymity_id', $anonymity->id)->where('debate_id', $debateId)->first();
-
-        if (!empty($existingVote) && $existingVote->vote_type === $voteType) {
-            $existingVote->delete();
-            return redirect()->route('mypage.bookmark');
-        }
-
-        if ($existingVote) {
-            $existingVote->delete();
-        }
-        Vote::create([
-            'anonymity_id' => $anonymity->id,
-            'debate_id' => $debateId,
-            'vote_type' => $voteType,
-        ]);
+        $this->userService->handleVote($debateId, $voteType);
 
         return redirect()->route('mypage.bookmark');
     }
 
-    public function post(Request $request)
+    public function post(Request $request, GetMyDebateUseCase $case)
     {
-        $userId = auth()->user()->id;
+        $userId = auth()->id();
         $anonymity = Anonymity::getByUserId($userId);
         if (!$anonymity) {
             return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
         }
+        $anonymity = $this->userService->checkAnonymity();
+        $this->userService->isCheckAnonymity($anonymity);
         $keyword = $request->input('keyword');
-        if ($keyword) {
-            $myDebates = Debate::where('anonymity_id', $anonymity->id)->titleSearch($keyword)->orderBy('created_at', 'desc')->paginate(5);
-        }
-        if (!$keyword) {
-            $myDebates = Debate::where('anonymity_id', $anonymity->id)->orderBy('created_at', 'desc')->paginate(5);
-        }
+        $myDebates = $case($anonymity, $keyword);
         return view('mypage.post', compact('myDebates'));
     }
 
-    public function destory($id)
+    public function destory($id, DeleteDebateUseCase $case)
     {
-        $debate = Debate::find($id);
-        $debate->delete();
+        $case($id);
         return redirect()->route('mypage.post');
     }
 }
