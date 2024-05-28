@@ -48,18 +48,20 @@ Route::group(['middleware' => 'auth'], function () {
     // 作成
     Route::get('/create', [TopController::class, 'create'])->name('index.create');
 
+    // マイページ
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+
+    Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
+    Route::post('/mypage/store', [MypageController::class, 'store'])->name('mypage.store');
+
+    Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
+    Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
+
     // お問い合わせ
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.contact');
     Route::post('/confirmation', [ContactController::class, 'confirmation'])->name('contact.confirmation');
     Route::get('/confirmation', [ContactController::class, 'showConfirmation'])->name('contact.showConfirmation');
     Route::post('/complate', [ContactController::class, 'complate'])->name('contact.complate');
-    // Route::get('/thank', [ContactController::class, 'thank'])->name('contact.thank');
-
-    // マイページ
-    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
-    Route::get('/mypage/nickname', [MypageController::class, 'nickname'])->name('mypage.nickname');
-    Route::get('/mypage/bookmark', [MypageController::class, 'bookmark'])->name('mypage.bookmark');
-    Route::get('/mypage/post', [MypageController::class, 'post'])->name('mypage.post');
 });
 
 

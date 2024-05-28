@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         $this->hasMany(Contact::class, 'user_id');
     }
+
+    public function anonymity()
+    {
+        $this->hasOne(Anonymity::class, 'user_id');
+    }
 }

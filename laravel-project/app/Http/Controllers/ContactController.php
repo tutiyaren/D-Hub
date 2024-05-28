@@ -33,7 +33,7 @@ class ContactController extends Controller
     {
         $contactData = $request->session()->get('contact_data');
         Contact::create([
-            'user_id' => auth()->id(),  // ログインしているユーザーのIDを取得
+            'user_id' => auth()->id(),
             'title' => $contactData['title'],
             'contents' => $contactData['contents']
         ]);
