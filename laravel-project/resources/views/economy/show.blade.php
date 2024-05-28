@@ -42,65 +42,11 @@
     <!-- コメント一覧 -->
     <div class="comments">
         <!-- foreach -->
-        <div class="comments-card">
-            <!-- 内容 -->
-            <div class="comment">
-                <p class="comment-text">その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？</p>
-            </div>
-            <!-- 投稿者情報 -->
-            <div class="who">
-                <p class="who-name">坪井美緒あああああああああああああああああああああああ</p>
-                <p class="who-create">2024-05-31 12:58:35</p>
-            </div>
-        </div>
-
-        <div class="comments-card">
-            <!-- 内容 -->
-            <div class="comment">
-                <p class="comment-text">その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？</p>
-            </div>
-            <!-- 投稿者情報 -->
-            <div class="who">
-                <p class="who-name">坪井美緒</p>
-                <p class="who-create">2024-05-31 12:58:35</p>
-            </div>
-        </div>
-
-        <div class="comments-card">
-            <!-- 内容 -->
-            <div class="comment">
-                <p class="comment-text">その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？</p>
-            </div>
-            <!-- 投稿者情報 -->
-            <div class="who">
-                <p class="who-name">坪井美緒</p>
-                <p class="who-create">2024-05-31 12:58:35</p>
-            </div>
-        </div>
-
-        <div class="comments-card">
-            <!-- 内容 -->
-            <div class="comment">
-                <p class="comment-text">その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？</p>
-            </div>
-            <!-- 投稿者情報 -->
-            <div class="who">
-                <p class="who-name">坪井美緒</p>
-                <p class="who-create">2024-05-31 12:58:35</p>
-            </div>
-        </div>
-
-        <div class="comments-card">
-            <!-- 内容 -->
-            <div class="comment">
-                <p class="comment-text">その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？</p>
-            </div>
-            <!-- 投稿者情報 -->
-            <div class="who">
-                <p class="who-name">坪井美緒</p>
-                <p class="who-create">2024-05-31 12:58:35</p>
-            </div>
-        </div>
+        <x-comment
+            contents="その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？" 
+            name="bbbBBB" 
+            createdAt="2024-05-31 12:58:35" 
+        />
     </div>
 
     <!-- コメント追加 -->
