@@ -9,14 +9,16 @@
 <div class="main">
     <!-- 国際 -->
     <div class="ttl">
-        <h1 class="ttl-top">国際</h1>
+        @if($genre)
+        <h1 class="ttl-top">{{ $genre->name }}</h1>
+        @endif
     </div>
 
     <!-- 検索 -->
     <div class="item">
-        <form action="" method="get" class="search">
+        <form method="get" class="search">
             @csrf
-            <input type="text" name="" value="" placeholder="キーワードで探す" class="search-keyword">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="キーワードで探す" class="search-keyword">
             <button type="submit" class="submit">検索</button>
         </form>
     </div>
@@ -26,17 +28,27 @@
         <div class="cards">
 
             <!-- foreach -->
+            @foreach($debates as $debate)
             <div class="card">
-                <x-debate 
-                    link="{{ route('international.show') }}" 
-                    title="与党の政策について" 
-                    contents="過去の経験から、今回の○○について、私は反対です。理由はこういうことで何々が予想され結果、またあの時のようなことが起きると思います。皆さんの意見を聞かせてください。" 
-                    name="AAAAaaa" 
-                    createdAt="2024-05-31 12:58:35" 
-                />
+                <a href="{{ route('international.show') }}" class="card-inner">
+                    <!-- タイトル -->
+                    <div class="title">
+                        <h2 class="title-name">{{ $debate->title }}</h2>
+                    </div>
+                    <!-- 内容 -->
+                    <div class="contents">
+                        <h3 class="contents-inner">{{ $debate->contents }}</h3>
+                    </div>
+                    <!-- 投稿者情報 -->
+                    <div class="user">
+                        <h4 class="user-name">{{ $debate->anonymity->nickname }}</h4>
+                        <p class="user-create">{{ $debate->created_at }}</p>
+                    </div>
+                </a>
                 <!-- マーク等 -->
                 <div class="mark">
                     <div class="mark-left">
+                        @auth
                         <form action="" method="post" class="both">
                             @csrf
                             <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
@@ -46,6 +58,7 @@
                             @csrf
                             <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
                         </form>
+                        @endauth
                     </div>
                     <div class="mark-right">
                         <div class="comment">
@@ -55,7 +68,11 @@
                     </div>
                 </div>
             </div>
-
+            @endforeach
+        </div>
+        <!-- ページネーション -->
+        <div class="paginate">
+            {{ $debates->appends(request()->query())->links('vendor.pagination.custom') }}
         </div>
     </div>
 
