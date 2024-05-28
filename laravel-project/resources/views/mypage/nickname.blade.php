@@ -7,6 +7,10 @@
 @section('content')
 
 <div class="main">
+    <!-- 戻る -->
+    <div class="back">
+        <a href="{{ url()->previous() }}" class="back-link">←</a>
+    </div>
     <div class="ttl">
         <h1 class="ttl-top">NickName設定</h1>
     </div>

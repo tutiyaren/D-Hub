@@ -33,4 +33,14 @@ class Anonymity extends Model
     {
         return $this->hasMany(Favorite_Debate::class, 'anonymity_id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'debate_id');
+    }
+
+    public static function getByUserId($userId)
+    {
+        return self::where('user_id', $userId)->first();
+    }
 }

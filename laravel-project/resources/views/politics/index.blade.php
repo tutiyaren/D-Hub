@@ -49,10 +49,25 @@
                 <div class="mark">
                     <div class="mark-left">
                         @auth
-                        <form action="" method="post" class="both">
+                        <form action="{{ route('politics.vote', $debate->id) }}" method="post" class="both">
                             @csrf
-                            <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
-                            <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
+                            <input type="hidden" name="debate_id" value="{{ $debate->id }}">
+                            <button type="submit" name="vote_type" value="agree" class="both-pros">
+                                @if ($isVote[$debate->id] === 'agree')
+                                <i class="fa-solid fa-circle" style="color: #FF4500;"></i>
+                                @endif
+                                @if (!($isVote[$debate->id] === 'agree'))
+                                <i class="fa-solid fa-circle"></i>
+                                @endif
+                            </button>
+                            <button type="submit" name="vote_type" value="disagree" class="both-cons">
+                                @if ($isVote[$debate->id]=== 'disagree')
+                                <i class="fa-solid fa-xmark" style="color: #0000CD;"></i>
+                                @endif
+                                @if (!($isVote[$debate->id]=== 'disagree'))
+                                <i class="fa-solid fa-xmark"></i>
+                                @endif
+                            </button>
                         </form>
                         <form action="{{ route('politics.bookmark', $debate->id) }}" method="post" class="bookmark">
                             @csrf

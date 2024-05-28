@@ -1,6 +1,21 @@
 .main {
     width: 100%;
 }
+.back {
+    width: 80%;
+    margin: 0 auto;
+}
+.back-link {
+    text-decoration: none;
+    color: #a789f8;
+    border: 1px solid #63E6BE;
+    border-radius: 10px;
+    padding: 1% 2%;
+    font-size: 1.3vw;
+}
+.back-link:hover {
+    background-color: #63E6BE;
+}
 
 .ttl {
     text-align: center;
@@ -89,11 +104,6 @@
     display: flex;
     justify-content: space-between;
 }
-.user-name {
-    font-size: 1.2vw;
-    width: auto;
-    border-top: 1px solid #63E6BE;
-}
 .user-create {
     font-size: 1vw;
     margin-top: 2%;
@@ -115,26 +125,15 @@
 }
 .both {
     margin-right: 5%;
+    display: flex;
 }
-.both-pros,
-.both-cons,
-.bookmark-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-.both-pros i,
-.both-cons i,
-.bookmark-button i {
-    color: #a389f8;
-    transition: color 0.3s ease;
-}
-
 .both-pros i,
 .both-cons i,
 .bookmark-button i,
 .comment i,
-.comment-count {
+.comment-count,
+.count-agree,
+.count-disagree {
     font-size: 1.2vw;
 }
 .mark-right {
@@ -142,15 +141,32 @@
     display: flex;
     align-items: center; 
 }
-.comment {
+.comment,
+.both-pros,
+.both-cons {
     display: flex;
     align-items: center;
 }
-.comment-count {
+.both-cons {
+    margin-left: 60%;
+}
+.comment-count,
+.count-agree,
+.count-disagree {
     margin-top: 0;
     color: #a789f8;
-    margin-left: 2%;
+    margin-left: 20%;
     margin-bottom: 0;
+}
+
+.comment-count {
+    color: #a789f8;
+}
+.count-agree {
+    color: #FF4500;
+}
+.count-disagree {
+    color: #0000CD;
 }
 .delete {
     margin-left: 10%;

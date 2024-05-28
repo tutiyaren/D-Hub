@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFavoriteDebatesTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFavoriteDebatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('favorite__debates', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->integer('anonymity_id')->nullable(false)->onDelete('cascade');
             $table->integer('debate_id')->nullable(false)->onDelete('cascade');
+            $table->enum('vote_type', ['agree', 'disagree'])->nullable(false);
             $table->timestamps();
 
             $table->unique(['anonymity_id', 'debate_id']);
@@ -30,6 +31,6 @@ class CreateFavoriteDebatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorite__debates');
+        Schema::dropIfExists('votes');
     }
 }
