@@ -11,20 +11,26 @@
         <h1 class="ttl-top">お問い合わせ</h1>
     </div>
 
-    <form action="" method="post" class="form">
+    <form action="{{ route('contact.confirmation') }}" method="post" class="form">
         @csrf
         <!-- 件名 -->
         <div class="title">
             <div class="title-inner">
                 <p class="title-inner__top"><label for="title">件名<span class="required">※必須</span></label></p>
-                <input type="text" name="" value="" id="title" placeholder="機能追加" class="title-inner__input">
+                <input type="text" name="title" value="{{ old('title', $contactData['title'] ?? '') }}" id="title" placeholder="機能追加" class="title-inner__input">
+                @error('title')
+                <p class="error">{{ $message }}</p>
+                @enderror
             </div>
         </div>
         <!-- 内容 -->
         <div class="contents">
             <div class="contents-inner">
                 <p class="contents-inner__bottom"><label for="contents">内容<span class="required">※必須</span></label></p>
-                <textarea name="" id="contents" placeholder="○○出来るようにして欲しい" class="contents-inner__textarea"></textarea>
+                <textarea name="contents" id="contents" placeholder="○○出来るようにして欲しい" class="contents-inner__textarea">{{ old('contents', $contactData['contents'] ?? '') }}</textarea>
+                @error('contents')
+                <p class="error">{{ $message }}</p>
+                @enderror
             </div>
         </div>
         <!-- 送信 -->

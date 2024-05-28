@@ -11,20 +11,20 @@
         <h1 class="ttl-top">お問い合わせ確認</h1>
     </div>
 
-    <form action="" method="post" class="form">
+    <form action="{{ route('contact.complate') }}" method="post" class="form">
         @csrf
         <!-- 件名 -->
         <div class="title">
             <div class="title-inner">
                 <p class="title-inner__top"><label for="title">件名</label></p>
-                <input type="text" name="" value="" id="title" readonly class="title-inner__input">
+                <input type="text" name="title" value="{{ $contactData['title'] }}" id="title" readonly class="title-inner__input">
             </div>
         </div>
         <!-- 内容 -->
         <div class="contents">
             <div class="contents-inner">
                 <p class="contents-inner__bottom"><label for="contents">内容</label></p>
-                <textarea name="" id="contents" readonly class="contents-inner__textarea"></textarea>
+                <textarea name="" id="contents" readonly class="contents-inner__textarea">{{ $contactData['contents'] }}</textarea>
             </div>
         </div>
         <!-- 送信 -->

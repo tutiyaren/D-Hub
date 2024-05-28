@@ -59,7 +59,11 @@
     color: #a789f8;
     padding: 1% 4%;
     font-weight: bold;
+    cursor: pointer;
 }
 .submit-button:hover {
     background-color: #63E6BE;
+}
+.error {
+    color: rgb(255, 42, 42);
 }
