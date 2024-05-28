@@ -24,10 +24,13 @@ class SocialController extends Controller
         }
         $genre = Genre::find(4);
         $userId = auth()->user()->id;
-        $anonymity = Anonymity::where('user_id', $userId)->first();
+        $anonymity = Anonymity::getByUserId($userId);
         $isBookmarked = [];
         $isVote = [];
         foreach ($debates as $debate) {
+            if (!$anonymity) {
+                return view('social.index', compact('debates', 'genre', 'isBookmarked', 'isVote', 'anonymity'));
+            }
             $existsBookmark = Favorite_Debate::where('anonymity_id', $anonymity->id)->where('debate_id', $debate->id)->exists();
             $isBookmarked[$debate->id] = $existsBookmark;
 
@@ -39,7 +42,7 @@ class SocialController extends Controller
                 $isVote[$debate->id] = $vote->vote_type;
             }
         }
-        return view('social.index', compact('debates', 'genre', 'isBookmarked', 'isVote'));
+        return view('social.index', compact('debates', 'genre', 'isBookmarked', 'isVote', 'anonymity'));
     }
 
     public function show($id)
@@ -47,7 +50,9 @@ class SocialController extends Controller
         $debate = Debate::find($id);
         $genre = Genre::find(4);
         $comments = Comment::where('debate_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('social.show', compact('debate', 'genre', 'comments'));
+        $userId = auth()->user()->id;
+        $anonymity = Anonymity::getByUserId($userId);
+        return view('social.show', compact('debate', 'genre', 'comments', 'anonymity'));
     }
 
     public function store(CommentRequest $request, $id)

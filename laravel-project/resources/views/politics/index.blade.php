@@ -49,6 +49,7 @@
                 <div class="mark">
                     <div class="mark-left">
                         @auth
+                        @if ($anonymity)
                         <form action="{{ route('politics.vote', $debate->id) }}" method="post" class="both">
                             @csrf
                             <input type="hidden" name="debate_id" value="{{ $debate->id }}">
@@ -80,6 +81,7 @@
                                 @endif
                             </button>
                         </form>
+                        @endif
                         @endauth
                     </div>
                     <div class="mark-right">

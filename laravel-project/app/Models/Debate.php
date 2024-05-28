@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Domain\ValueObject\Debate\Id;
+use App\Domain\ValueObject\Debate\AnonymityId;
+use App\Domain\ValueObject\Debate\GenreId;
+use App\Domain\ValueObject\Debate\Title;
+use App\Domain\ValueObject\Debate\Contents;
 
 class Debate extends Model
 {
@@ -62,5 +67,55 @@ class Debate extends Model
             default:
                 return route('mypage.index');
         }
+    }
+
+    // id
+    public function setIdAttribute($value)
+    {
+        $this->attributes['id'] = new Id($value);
+    }
+    public function getIdAttribute($value)
+    {
+        return $value instanceof Id ? $value->value() : $value;
+    }
+
+    // anonymity_id
+    public function setAnonymityIdAttribute($value)
+    {
+        $this->attributes['anonymity_id'] = new AnonymityId($value);
+    }
+    public function getAnonymityIdAttribute($value)
+    {
+        return $value instanceof AnonymityId ? $value->value() : $value;
+    }
+
+    // genre_id
+    public function setGenreIdAttribute($value)
+    {
+        $this->attributes['genre_id'] = new GenreId($value);
+    }
+    public function getGenreIdAttribute($value)
+    {
+        return $value instanceof GenreId ? $value->value() : $value;
+    }
+
+    // title
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = new Title($value);
+    }
+    public function getTitleAttribute($value)
+    {
+        return $value instanceof Title ? $value->value() : $value;
+    }
+
+    // contents
+    public function setContentsAttribute($value)
+    {
+        $this->attributes['contents'] = new Contents($value);
+    }
+    public function getContentsAttribute($value)
+    {
+        return $value instanceof Contents ? $value->value() : $value;
     }
 }

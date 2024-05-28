@@ -58,6 +58,8 @@
     </div>
 
     <!-- コメント追加 -->
+    @auth
+    @if ($anonymity)
     <div class="add">
         <form action="{{ route('economy.store', ['id' => $debate->id]) }}" method="post" class="add-comment">
             @csrf
@@ -73,6 +75,8 @@
             </div>
         </form>
     </div>
+    @endif
+    @endauth
 </div>
 
 @endsection
