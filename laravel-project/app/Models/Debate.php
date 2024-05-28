@@ -26,6 +26,11 @@ class Debate extends Model
         return $this->belongsTo(Genre::class, 'genre_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'anonymity_id');
+    }
+
     public function scopeTitleSearch($query, $keyword)
     {
         if (!empty($keyword)) {

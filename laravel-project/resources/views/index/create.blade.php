@@ -11,12 +11,6 @@
         <h1 class="ttl-top">議題作成</h1>
     </div>
 
-    @if(session('error'))
-        <div class="error-top">
-            {{ session('error') }}
-        </div>
-    @endif
-
     <form action="{{ route('index.store') }}" method="post" class="form">
         @csrf
         <!-- ジャンル -->

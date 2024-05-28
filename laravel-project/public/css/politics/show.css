@@ -146,3 +146,6 @@
 .submit-button:hover {
     background-color: #63E6BE;
 }
+.error {
+    color: rgb(252, 42, 42);
+}

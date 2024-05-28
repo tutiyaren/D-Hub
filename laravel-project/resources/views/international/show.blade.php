@@ -42,23 +42,34 @@
     <!-- コメント一覧 -->
     <div class="comments">
         <!-- foreach -->
-        <x-comment
-            contents="その意見に対して、私はこう考えます。あなたのそれだと、こういったことも予想されるかと思います。ただ、あれはとても良い考えだと思うので、ここをこうしたらもっと良くなるんではないでしょうか？" 
-            name="bbbBBB" 
-            createdAt="2024-05-31 12:58:35" 
-        />
+        @foreach($comments as $comment)
+        <div class="comments-card">
+            <!-- 内容 -->
+            <div class="comment">
+                <p class="comment-text">{{ $comment->contents }}</p>
+            </div>
+            <!-- 投稿者情報 -->
+            <div class="who">
+                <p class="who-name">{{ $comment->anonymity->nickname }}</p>
+                <p class="who-create">{{ $comment->created_at }}</p>
+            </div>
+        </div>
+        @endforeach
     </div>
 
     <!-- コメント追加 -->
     <div class="add">
-        <form action="" method="post" class="add-comment">
+        <form action="{{ route('international.store', ['id' => $debate->id]) }}" method="post" class="add-comment">
             @csrf
             <div class="text">
-                <h5 class="text-ttl"><label for="comment">コメント</label></h5>
-                <textarea name="comment" id="comment" class="text-text" placeholder="議論に参加しましょう！"></textarea>
+                <h5 class="text-ttl"><label for="contents">コメント</label></h5>
+                <textarea name="contents" id="contents" class="text-text" placeholder="議論に参加しましょう！"></textarea>
             </div>
+            @error('contents')
+            <p class="error">{{ $message }}</p>
+            @enderror
             <div class="submit">
-                <botton type="submit" class="submit-button">コメントする</botton>
+                <button type="submit" class="submit-button">コメントする</button>
             </div>
         </form>
     </div>

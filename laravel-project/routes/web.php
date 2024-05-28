@@ -49,6 +49,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/create', [TopController::class, 'create'])->name('index.create');
     Route::post('/create/store', [TopController::class, 'store'])->name('index.store');
 
+    // 政治
+    Route::post('/politics/show/{id}/store', [PoliticsController::class, 'store'])->name('politics.store');
+    // 経済
+    Route::post('/economy/show/{id}/store', [EconomyController::class, 'store'])->name('economy.store');
+    // 国際
+    Route::post('/international/show/{id}/store', [InternationalController::class, 'store'])->name('international.store');
+    // 社会
+    Route::post('/social/show/{id}/store', [SocialController::class, 'store'])->name('social.store');
+
     // マイページ
     Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 
@@ -66,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-// 詳細ページのリンクをやって、各議題ごとの詳細ページを作成していく
+// マイページから
 // 賛成・反対、ブックマーク、コメント数はまだ先！！
 
 
