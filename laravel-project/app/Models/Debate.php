@@ -28,13 +28,29 @@ class Debate extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'anonymity_id');
+        return $this->hasMany(Comment::class, 'debate_id');
     }
 
     public function scopeTitleSearch($query, $keyword)
     {
         if (!empty($keyword)) {
             $query->where('title', 'like', '%' . $keyword . '%');
+        }
+    }
+
+    public function generateRoute()
+    {
+        switch ($this->genre_id) {
+            case 1:
+                return route('politics.show', $this->id);
+            case 2:
+                return route('economy.show', $this->id);
+            case 3:
+                return route('international.show', $this->id);
+            case 4:
+                return route('social.show', $this->id);
+            default:
+                return route('mypage.index');
         }
     }
 }

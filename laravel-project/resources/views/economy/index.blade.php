@@ -63,7 +63,7 @@
                     <div class="mark-right">
                         <div class="comment">
                             <i class="fa-regular fa-comments" style="color: #a789f8;"></i>
-                            <p class="comment-count">5</p>
+                            <p class="comment-count">{{ $debate->comments->count() }}</p>
                         </div>
                     </div>
                 </div>
