@@ -73,6 +73,7 @@
         <!-- ページネーション -->
         <div class="paginate">
             {{ $debates->appends(request()->query())->links('vendor.pagination.custom') }}
+
         </div>
     </div>
 
