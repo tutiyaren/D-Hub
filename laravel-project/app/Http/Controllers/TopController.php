@@ -1,44 +1,41 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\DebateRequest;
-use App\Models\Genre;
-use App\Models\Anonymity;
-use App\Models\Debate;
+use App\UseCase\CreateDebate\CreateDebateUseCase;
+use App\UseCase\CreateDebate\GetGenreUseCase;
+use App\UseCase\Services\UserService;
 
 class TopController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+    
     public function index()
     {
         return view('index.top');
     }
 
     // 議題作成ページ
-    public function create()
+    public function create(GetGenreUseCase $case)
     {
-        $genres = Genre::get();
+        $genres = $case();
         return view('index.create', compact('genres'));
     }
 
     // 議題作成処理
-    public function store(DebateRequest $request)
+    public function store(DebateRequest $request, CreateDebateUseCase $case)
     {
-        $userId = auth()->user()->id;
-        $anonymity = Anonymity::getByUserId($userId);
-        if (!$anonymity) {
-            return redirect()->route('mypage.nickname')->with('error', 'ニックネームを設定してください');
+        $anonymity = $this->userService->checkAnonymity();
+        $redirectResponse = $this->userService->isCheckAnonymity($anonymity);
+        if ($redirectResponse) {
+            return $redirectResponse;
         }
-        $genreId = $request->input('genre_id');
-        $title = $request->input('title');
-        $contents = $request->input('contents');
-        Debate::create([
-            'anonymity_id' => $anonymity->id,
-            'genre_id' => $genreId,
-            'title' => $title,
-            'contents' => $contents,
-        ]);
+        $case($request);
         return redirect()->route('index.index');
     }
 }

@@ -4,40 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
-use App\Models\Contact;
+use App\UseCase\Contact\GetContactUseCase;
+use App\UseCase\Contact\SessionContactUseCase;
+use App\UseCase\Contact\GetConfirmationUseCase;
+use App\UseCase\Contact\CreateContactUseCase;
 
 class ContactController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, GetContactUseCase $case)
     {
-        $contactData = $request->session()->get('contact_data', []);
+        $contactData = $case($request);
         return view('contact.contact', compact('contactData'));
     }
 
-    public function confirmation(ContactRequest $request)
+    public function confirmation(ContactRequest $request, SessionContactUseCase $case)
     {
-        $request->session()->put('contact_data', $request->all());
+        $case($request);
         return redirect()->route('contact.showConfirmation');
     }
 
-    public function showConfirmation(Request $request)
+    public function showConfirmation(Request $request, GetConfirmationUseCase $case)
     {
-        $contactData = $request->session()->get('contact_data');
+        $contactData = $case($request);
         if (!$contactData) {
             return redirect()->route('contact.contact');
         }
         return view('contact.confirmation', compact('contactData'));
     }
 
-    public function complate(Request $request)
+    public function complate(Request $request, CreateContactUseCase $case)
     {
-        $contactData = $request->session()->get('contact_data');
-        Contact::create([
-            'user_id' => auth()->id(),
-            'title' => $contactData['title'],
-            'contents' => $contactData['contents']
-        ]);
-        $request->session()->forget('contact_data');
+        $case($request);
         return view('contact.thank');
     }
 }
