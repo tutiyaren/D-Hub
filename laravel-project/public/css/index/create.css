@@ -65,3 +65,13 @@
 .submit-button:hover {
     background-color: #63E6BE;
 }
+
+.error {
+    color: rgb(255, 42, 42);
+}
+.error-top {
+    color: rgb(255, 42, 42);
+    text-align: center;
+    margin-top: 3%;
+    font-size: 2vw;
+}

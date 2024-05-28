@@ -12,4 +12,9 @@ class Genre extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function debates()
+    {
+        return $this->hasMany(Debate::class, 'genre_id');
+    }
 }

@@ -18,4 +18,9 @@ class Anonymity extends Model
     {
         $this->belongsTo(User::class, 'user_id');
     }
+
+    public function debates()
+    {
+        return $this->hasMany(Debate::class, 'anonymity_id');
+    }
 }
