@@ -63,6 +63,18 @@
 .card:hover {
     background-color: #63E6BE;
 }
+.genre {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.genre-ttl {
+    color: #a789f8;
+    letter-spacing: 5px;
+    border-bottom: 1px solid #63E6BE;
+    width: auto;
+    font-size: 1.4vw;
+}
 .title-name {
     border-bottom: 1px solid #63E6BE;
     width: 100%;
@@ -79,6 +91,7 @@
 }
 .user-name {
     font-size: 1.2vw;
+    width: auto;
     border-top: 1px solid #63E6BE;
 }
 .user-create {

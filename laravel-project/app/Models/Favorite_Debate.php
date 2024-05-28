@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Debate extends Model
+class Favorite_Debate extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'anonymity_id',
-        'genre_id',
-        'title',
-        'contents'
+        'debate_id'
     ];
 
     public function anonymity()
@@ -21,26 +19,9 @@ class Debate extends Model
         return $this->belongsTo(Anonymity::class, 'anonymity_id');
     }
 
-    public function genre()
+    public function debate()
     {
-        return $this->belongsTo(Genre::class, 'genre_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'debate_id');
-    }
-
-    public function favorites_debates()
-    {
-        return $this->hasMany(Favorite_Debate::class, 'anonymity_id');
-    }
-
-    public function scopeTitleSearch($query, $keyword)
-    {
-        if (!empty($keyword)) {
-            $query->where('title', 'like', '%' . $keyword . '%');
-        }
+        return $this->belongsTo(Debate::class, 'debate_id');
     }
 
     public function generateRoute()

@@ -30,6 +30,10 @@
             @foreach($myDebates as $myDebate)
             <div class="card">
                 <a href="{{ $myDebate->generateRoute() }}" class="card-inner">
+                    <!-- ジャンル名 -->
+                    <div class="genre">
+                        <p class="genre-ttl">{{ $myDebate->genre->name }}</p>
+                    </div>
                     <!-- タイトル -->
                     <div class="title">
                         <h2 class="title-name">{{ $myDebate->title }}</h2>
@@ -52,10 +56,6 @@
                             <button type="submit" class="both-pros"><i class="fa-solid fa-circle"></i></button>
                             <button type="submit" class="both-cons"><i class="fa-solid fa-xmark"></i></button>
                         </form>
-                        <!-- <form action="" method="post" class="bookmark">
-                            @csrf
-                            <botton type="submit" class="bookmark-button"><i class="fa-solid fa-bookmark"></i></botton>
-                        </form> -->
                     </div>
                     <div class="mark-right">
                         <div class="comment">
