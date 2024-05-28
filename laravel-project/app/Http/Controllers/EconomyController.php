@@ -21,8 +21,10 @@ class EconomyController extends Controller
         return view('economy.index', compact('debates', 'genre'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('economy.show');
+        $debate = Debate::find($id);
+        $genre = Genre::find(2);
+        return view('economy.show', compact('debate', 'genre'));
     }
 }

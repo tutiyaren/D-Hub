@@ -13,18 +13,29 @@
     </div>
     <!-- 国際 -->
     <div class="ttl">
-        <h1 class="ttl-top">国際</h1>
+        @if($genre)
+        <h1 class="ttl-top">{{ $genre->name }}</h1>
+        @endif
     </div>
 
     <!-- 該当の議題 -->
     <div class="inner">
         <div class="card">
-            <x-detail
-                title="与党の政策について" 
-                contents="過去の経験から、今回の○○について、私は反対です。理由はこういうことで何々が予想され結果、またあの時のようなことが起きると思います。皆さんの意見を聞かせてください。" 
-                name="AAAAaaa" 
-                createdAt="2024-05-31 12:58:35" 
-            />
+            <div class="card-inner">
+                <!-- タイトル -->
+                <div class="title">
+                    <h2 class="title-name">{{ $debate->title }}</h2>
+                </div>
+                <!-- 内容 -->
+                <div class="contents">
+                    <h3 class="contents-inner">{{ $debate->contents }}</h3>
+                </div>
+                <!-- 投稿者情報 -->
+                <div class="user">
+                    <h4 class="user-name">{{ $debate->anonymity->nickname }}</h4>
+                    <p class="user-create">{{ $debate->created_at }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
