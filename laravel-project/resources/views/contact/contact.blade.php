@@ -13,6 +13,16 @@
 
     <form action="{{ route('contact.confirmation') }}" method="post" class="form">
         @csrf
+        <!-- 連絡先 -->
+        <div class="title">
+            <div class="title-inner">
+                <p class="title-inner__top"><label for="tel">連絡先<span class="required">※必須</span></label></p>
+                <input type="text" name="tel" value="{{ old('tel', $contactData['tel'] ?? '') }}" id="tel" placeholder="000-1234-1234" class="title-inner__input">
+                @error('tel')
+                <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
         <!-- 件名 -->
         <div class="title">
             <div class="title-inner">

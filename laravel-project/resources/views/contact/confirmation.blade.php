@@ -16,6 +16,13 @@
         <!-- 件名 -->
         <div class="title">
             <div class="title-inner">
+                <p class="title-inner__top"><label for="tel">連絡先</label></p>
+                <input type="text" name="tel" value="{{ $contactData['tel'] }}" id="tel" readonly class="title-inner__input">
+            </div>
+        </div>
+        <!-- 件名 -->
+        <div class="title">
+            <div class="title-inner">
                 <p class="title-inner__top"><label for="title">件名</label></p>
                 <input type="text" name="title" value="{{ $contactData['title'] }}" id="title" readonly class="title-inner__input">
             </div>

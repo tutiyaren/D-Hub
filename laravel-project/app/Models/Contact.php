@@ -24,6 +24,11 @@ class Contact extends Model
         $this->belongsTo(User::class, 'user_id');
     }
 
+    public function tel()
+    {
+        return $this->hasOne(ContactTel::class);
+    }
+
     // id
     public function setIdAttribute($value)
     {
